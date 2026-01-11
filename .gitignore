@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Additional
+_prompts
+.nova
+.vite
+RTV.md

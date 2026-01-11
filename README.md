@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# Promo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+自己PRを目的とした Web アプリケーションです。  
+React / TypeScript / Vite を用いて構築し、Docker 上で開発できる構成になっています。
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 技術スタック
 
-## React Compiler
+- Frontend
+  - React
+  - TypeScript
+  - Vite
+- Lint / Tooling
+  - ESLint
+- Infrastructure
+  - Docker
+  - Docker Compose
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## ディレクトリ構成
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```text
+.
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+├── package-lock.json
+├── vite.config.ts
+├── src/
+│   ├── main.tsx
+│   ├── App.tsx
+│   └── assets/
+└── public/
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 開発環境の起動方法（ローカル）
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 前提条件
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Docker Desktop がインストールされていること
+
+### 起動手順
+
+```bash
+docker compose up
 ```
+
+#### ブラウザで以下にアクセスしてください。
+
+```arduino
+http://localhost:5173
+```
+
+## よく使うコマンド
+### コンテナ起動
+```bash
+docker compose up
+```
+
+### コンテナ停止
+```bash
+docker compose down
+```
+
+## 本番用ビルドと公開方法
+### ビルド
+```bash
+npm run build
+```
+
+`dist/` ディレクトリが生成されます。
+
+### 公開
+
+- `dist/` 配下のファイル一式をサーバの公開ディレクトリにアップロードしてください。
+
+※ SPA のため、`.htaccess` でリライトルールが必要になる場合があります。
+
+## 補足
+- Docker は開発環境専用です
+- 本番環境では Node.js や Docker は不要です
