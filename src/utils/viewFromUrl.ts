@@ -1,16 +1,19 @@
 // src/utils/viewFromUrl.ts
-import type { ViewState } from "../types/ViewState";
+import type { Section } from '@/types/Section';
 
-const isViewState = (value: string): value is ViewState => {
-  return ["cover", "career", "spec", "cases", "contact"].includes(value);
-};
-
-export const getInitialView = (): ViewState => {
+export const viewFromUrl = (): Section | null => {
   const params = new URLSearchParams(window.location.search);
-  const view = params.get("view");
+  const section = params.get('section');
 
-  if (view && isViewState(view)) {
-    return view;
+  if (
+    section === 'cover' ||
+    section === 'career' ||
+    section === 'spec' ||
+    section === 'cases' ||
+    section === 'contact'
+  ) {
+    return section;
   }
-  return "cover";
+
+  return null;
 };
