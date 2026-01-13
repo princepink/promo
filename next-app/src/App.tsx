@@ -1,4 +1,6 @@
 // src/App.tsx
+'use client';
+
 import { useEffect, useState } from 'react';
 import type { Section } from './types/Section';
 
