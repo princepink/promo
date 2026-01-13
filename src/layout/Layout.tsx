@@ -1,25 +1,26 @@
 // src/layout/Layout.tsx
-import { useState, useEffect } from "react";
-import type { ViewState } from "../types/ViewState";
-import { getInitialView } from "../utils/viewFromUrl";
+import type { ReactNode } from 'react';
+import type { Section } from '../types/Section';
+import Navigation from '../components/Navigation';
 
-import Navigation from "./Navigation";
-import ViewContainer from "./ViewContainer";
+type LayoutProps = {
+  section: Section;
+  setSection: (section: Section) => void;
+  children: ReactNode;
+};
 
-const Layout = () => {
-  const [view, setView] = useState<ViewState>(getInitialView());
-
-  // state → URL 同期
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    params.set("view", view);
-    window.history.pushState(null, "", `?${params.toString()}`);
-  }, [view]);
-
+const Layout = ({
+  section,
+  setSection,
+  children,
+}: LayoutProps) => {
   return (
     <>
-      <Navigation current={view} onChange={setView} />
-      <ViewContainer view={view} />
+      <Navigation
+        currentSection={section}
+        setSection={setSection}
+      />
+      <main>{children}</main>
     </>
   );
 };

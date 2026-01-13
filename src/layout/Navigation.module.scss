@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+}
+
+.card {
+  padding: 8px 12px;
+  border: 1px solid #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.active {
+  border-color: white;
+}

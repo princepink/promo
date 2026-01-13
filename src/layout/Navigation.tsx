@@ -1,19 +1,35 @@
 // src/layout/Navigation.tsx
 import type { ViewState } from "../types/ViewState";
 
+import styles from "./Navigation.module.scss";
+
 type Props = {
   current: ViewState;
   onChange: (view: ViewState) => void;
 };
 
 const Navigation = ({ current, onChange }: Props) => {
+  const items: ViewState[] = [
+    "cover",
+    "career",
+    "spec",
+    "cases",
+    "contact",
+  ];
+
   return (
-    <nav>
-      <button onClick={() => onChange("cover")}>Cover</button>
-      <button onClick={() => onChange("career")}>Career</button>
-      <button onClick={() => onChange("spec")}>Spec</button>
-      <button onClick={() => onChange("cases")}>Cases</button>
-      <button onClick={() => onChange("contact")}>Contact</button>
+    <nav className={styles.nav}>
+      {items.map((item) => (
+        <div
+          key={item}
+          className={`${styles.card} ${
+            current === item ? styles.active : ""
+          }`}
+          onClick={() => onChange(item)}
+        >
+          {item}
+        </div>
+      ))}
     </nav>
   );
 };

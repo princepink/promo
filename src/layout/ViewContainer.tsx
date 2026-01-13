@@ -7,6 +7,8 @@ import Spec from "../views/Spec";
 import Cases from "../views/Cases";
 import Contact from "../views/Contact";
 
+import styles from "./ViewContainer.module.scss";
+
 type Props = {
   view: ViewState;
 };
