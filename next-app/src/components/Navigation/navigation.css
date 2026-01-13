@@ -1,0 +1,5 @@
+/* src/components/Navigation/navigation.css */
+button[data-active='true'] {
+  font-weight: bold;
+  text-decoration: underline;
+}
