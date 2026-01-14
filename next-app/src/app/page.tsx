@@ -1,9 +1,9 @@
-'use client';
+// next-app/src/app/page.tsx
 
-import App from '../App';
+import AppShell from '@/components/AppShell';
 
 const Page = () => {
-  return <App />;
+  return <AppShell />;
 };
 
 export default Page;

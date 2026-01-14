@@ -3,25 +3,14 @@ import type { NavigationProps } from './types';
 import { navItems } from './navItems';
 import './navigation.css';
 
-const Navigation = ({
-  currentSection,
-  setSection,
-}: NavigationProps) => {
+const Navigation = ({ current, onChange }: NavigationProps) => {
   return (
     <nav>
-      <ul>
-        {navItems.map((item) => (
-          <li key={item.id}>
-            <button
-              type="button"
-              data-active={currentSection === item.id}
-              onClick={() => setSection(item.id)}
-            >
-              {item.label}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <button onClick={() => onChange('cover')}>Cover</button>
+      <button onClick={() => onChange('career')}>Career</button>
+      <button onClick={() => onChange('spec')}>Spec</button>
+      <button onClick={() => onChange('cases')}>Cases</button>
+      <button onClick={() => onChange('contact')}>Contact</button>
     </nav>
   );
 };
