@@ -1,11 +1,11 @@
-// next-app/src/components/AppShell/index.tsx
-
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Section } from '@/types/Section';
 
 import Navigation from '@/components/Navigation';
+import { sectionFromUrl } from '@/utils/sectionFromUrl';
+import { updateUrl } from '@/utils/updateUrl';
 
 import Cover from '@/views/Cover';
 import Career from '@/views/Career';
@@ -15,6 +15,18 @@ import Contact from '@/views/Contact';
 
 const AppShell = () => {
   const [section, setSection] = useState<Section>('cover');
+
+  useEffect(() => {
+    const initial = sectionFromUrl();
+
+    if (initial) {
+      setSection(initial);
+    }
+  }, []);
+
+  useEffect(() => {
+    updateUrl(section);
+  }, [section]);
 
   return (
     <>
